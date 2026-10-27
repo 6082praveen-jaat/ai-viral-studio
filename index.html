@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0b0b14">
+<title>AI Viral Studio</title>
+<style>
+:root{--bg:#0b0b14;--card:#151522;--line:#29293c;--text:#f7f7ff;--muted:#a4a4bd;--pink:#ff4fa3;--purple:#8b70ff}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,sans-serif}
+header{padding:22px 17px;background:linear-gradient(135deg,#281447,#17132c 60%,#10101b);border-bottom:1px solid var(--line)}
+.brand{font-size:23px;font-weight:850;letter-spacing:-.7px}
+.brand span{color:var(--pink)}
+header p{color:#c5bddb;font-size:13px;margin:7px 0 0}
+main{max-width:760px;margin:auto;padding:17px}
+.pill{display:inline-block;padding:6px 10px;border:1px solid #39304e;border-radius:30px;color:#d9c9ff;font-size:11px;margin-bottom:10px}
+h2{font-size:19px;margin:12px 0 5px}
+.sub{font-size:13px;color:var(--muted);line-height:1.5;margin:0 0 16px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.tool{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:15px 12px;cursor:pointer;color:var(--text);text-align:left;min-height:102px}
+.tool.active{border-color:var(--pink);background:#211629}
+.tool .emoji{font-size:23px}
+.tool b{display:block;font-size:14px;margin:8px 0 4px}
+.tool small{font-size:11px;color:var(--muted)}
+.panel{margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:17px;padding:16px}
+label{display:block;font-size:13px;font-weight:650;margin:13px 0 8px}
+input,textarea,select{width:100%;background:#0d0d18;color:var(--text);border:1px solid #343449;border-radius:10px;padding:12px;font:inherit;font-size:14px;outline:none}
+textarea{min-height:95px;resize:vertical}
+input:focus,textarea:focus,select:focus{border-color:var(--purple)}
+button{font:inherit}
+.primary{margin-top:14px;width:100%;padding:13px;border:0;border-radius:11px;color:white;font-weight:750;background:linear-gradient(100deg,#e843a0,#805bff);cursor:pointer}
+.secondary{background:#242438;color:white;border:1px solid #3a3a50;border-radius:9px;padding:9px 12px;cursor:pointer}
+.output{margin-top:15px;border-top:1px solid var(--line);padding-top:14px}
+.outputHead{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.outputHead b{font-size:14px}
+#result{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.7;font-size:14px;color:#e7e7f4;margin-top:12px}
+.notice{font-size:11px;line-height:1.6;color:var(--muted);margin-top:13px}
+footer{text-align:center;color:#77778e;font-size:11px;padding:25px 10px}
+.hidden{display:none}
+@media(min-width:600px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">⚡ AI <span>Viral Studio</span></div>
+  <p>Your creator toolkit · Reels · Shorts · Social Media</p>
+</header>
+
+<main>
+  <div class="pill">✦ CREATOR DASHBOARD</div>
+  <h2>Create something viral</h2>
+  <p class="sub">Choose a tool, enter your topic and generate your content draft.</p>
+
+  <div class="grid" id="tools">
+    <button class="tool active" data-tool="script">
+      <span class="emoji">🎬</span><b>Viral Script</b><small>Reels & YouTube Shorts</small>
+    </button>
+    <button class="tool" data-tool="caption">
+      <span class="emoji">✍️</span><b>Caption Maker</b><small>Engaging social captions</small>
+    </button>
+    <button class="tool" data-tool="hashtags">
+      <span class="emoji">#️⃣</span><b>Hashtag Generator</b><small>Topic-based tag ideas</small>
+    </button>
+    <button class="tool" data-tool="title">
+      <span class="emoji">🚀</span><b>Title Generator</b><small>Clickable title ideas</small>
+    </button>
+    <button class="tool" data-tool="hooks">
+      <span class="emoji">🪝</span><b>Viral Hooks</b><small>Opening lines to test</small>
+    </button>
+    <button class="tool" data-tool="ideas">
+      <span class="emoji">💡</span><b>Content Ideas</b><small>Fresh ideas for creators</small>
+    </button>
+  </div>
+
+  <section class="panel">
+    <h2 id="toolTitle">🎬 Viral Script</h2>
+    <p class="sub" id="toolDesc">Create a short video script draft.</p>
+
+    <label for="topic">Your topic</label>
+    <input id="topic" maxlength="300" placeholder="e.g. 5 AI tools for students">
+
+    <label for="platform">Platform</label>
+    <select id="platform">
+      <option>Instagram Reels</option>
+      <option>YouTube Shorts</option>
+      <option>YouTube</option>
+      <option>Facebook</option>
+      <option>General social media</option>
+    </select>
+
+    <label for="language">Content language</label>
+    <select id="language">
+      <option value="Hinglish">Hinglish</option>
+      <option value="Hindi">Hindi</option>
+      <option value="English">English</option>
+    </select>
+
+    <label for="style">Content style</label>
+    <select id="style">
+      <option>Engaging</option>
+      <option>Funny</option>
+      <option>Educational</option>
+      <option>Motivational</option>
+      <option>Storytelling</option>
+    </select>
+
+    <button class="primary" id="generate">✨ Generate Content</button>
+
+    <div class="output hidden" id="output">
+      <div class="outputHead">
+        <b>✨ Your content draft</b>
+        <button class="secondary" id="copy">Copy text</button>
+      </div>
+      <div id="result"></div>
+      <p class="notice">This starter version uses local templates, not a live AI model. Connect an AI API through a secure backend to enable real AI-generated responses.</p>
+    </div>
+  </section>
+</main>
+
+<footer>AI Viral Studio · Creator tools for everyone</footer>
+
+<script>
+const toolInfo = {
+ script: ["🎬 Viral Script","Create a short video script draft."],
+ caption: ["✍️ Caption Maker","Draft a caption for your social post."],
+ hashtags: ["#️⃣ Hashtag Generator","Get hashtag ideas based on your topic."],
+ title: ["🚀 Title Generator","Create attention-grabbing title drafts."],
+ hooks: ["🪝 Viral Hooks","Draft opening lines to grab attention."],
+ ideas: ["💡 Content Ideas","Brainstorm content ideas for your niche."]
+};
+
+let selected = "script";
+
+document.querySelectorAll(".tool").forEach(button => {
+  button.addEventListener("click", () => {
+    document.querySelectorAll(".tool").forEach(b => b.classList.remove("active"));
+    button.classList.add("active");
+    selected = button.dataset.tool;
+    document.getElementById("toolTitle").textContent = toolInfo[selected][0];
+    document.getElementById("toolDesc").textContent = toolInfo[selected][1];
+    document.getElementById("output").classList.add("hidden");
+  });
+});
+
+function makeContent(topic, platform, lang, style) {
+  const t = topic.trim();
+  const english = lang === "English";
+  const hindi = lang === "Hindi";
+  const opening = english
+    ? `Want to learn about ${t}? Here is something worth knowing.`
+    : hindi
+    ? `${t} के बारे में यह जरूरी बात जानिए!`
+    : `${t} ke baare mein ye baat zaroor jaano!`;
+
+  const close = english
+    ? "Save this post and share it with someone who needs it!"
+    : hindi
+    ? "पोस्ट सेव करें और जिसे जरूरत हो उसके साथ शेयर करें!"
+    : "Post save karo aur apne friends ke saath share karo!";
+
+  const styleLine = {
+    Engaging: english ? "Keep watching for the key takeaway." : "End tak dekho, main point abhi aata hai!",
+    Funny: english ? "And yes, we have all been there!" : "Aur haan, aisa hum sabke saath hua hai!",
+    Educational: english ? "Let's break it down into simple steps." : "Chalo ise simple steps mein samajhte hain.",
+    Motivational: english ? "Small steps can lead to meaningful progress." : "Chhote steps bhi bada change la sakte hain.",
+    Storytelling: english ? "Here is a simple way to look at it." : "Isse ek simple example se samajhte hain."
+  }[style];
+
+  if (selected === "script") {
+    return `🎬 ${platform} — SCRIPT DRAFT\n\n[HOOK — first 3 seconds]\n${opening}\n\n[MAIN CONTENT]\n${styleLine}\n\n1. Introduce the topic: ${t}.\n2. Explain the main point in simple words.\n3. Add a real example or useful tip.\n\n[CALL TO ACTION]\n${close}\n\nTip: Add your own verified facts and examples before posting.`;
+  }
+
+  if (selected === "caption") {
+    return `✨ ${t}\n\n${styleLine}\n\n${close}\n\n#ContentCreator #${t.split(/\s+/).join("")}`;
+  }
+
+  if (selected === "hashtags") {
+    const clean = t.toLowerCase().replace(/[^a-z0-9 ]/g," ").trim().split(/\s+/).filter(Boolean);
+    const topicTags = clean.map(word => "#" + word);
+    return [...new Set([...topicTags, "#ContentCreator", "#Reels", "#Shorts", "#Trending", "#LearnSomethingNew"])].join(" ");
+  }
+
+  if (selected === "title") {
+    return [
+      `1. ${t}: What You Should Know`,
+      `2. The Simple Guide to ${t}`,
+      `3. 3 Things to Know About ${t}`,
+      `4. Before You Try ${t}, Watch This`,
+      `5. ${t} Explained in Simple Words`,
+      `6. Common Mistakes to Avoid with ${t}`
+    ].join("\n\n");
+  }
+
+  if (selected === "hooks") {
+    return [
+      `1. ${opening}`,
+      `2. "Stop scrolling! Let's talk about ${t}."`,
+      `3. "Here are 3 things I wish I knew about ${t}."`,
+      `4. "Most beginners overlook this about ${t}."`,
+      `5. "Let's make ${t} easy to understand."`
+    ].join("\n\n");
+  }
+
+  return [
+    `1. Beginner's guide to ${t}`,
+    `2. 3 common mistakes about ${t}`,
+    `3. Myth vs fact: ${t}`,
+    `4. A quick tutorial on ${t}`,
+    `5. Frequently asked questions about ${t}`,
+    `6. Things I wish I knew earlier about ${t}`,
+    `7. One-minute tips about ${t}`
+  ].join("\n\n");
+}
+
+document.getElementById("generate").addEventListener("click", () => {
+  const topic = document.getElementById("topic").value.trim();
+  if (!topic) {
+    document.getElementById("topic").focus();
+    document.getElementById("topic").placeholder = "Pehle apna topic likho!";
+    return;
+  }
+  const platform = document.getElementById("platform").value;
+  const lang = document.getElementById("language").value;
+  const style = document.getElementById("style").value;
+  document.getElementById("result").textContent = makeContent(topic, platform, lang, style);
+  document.getElementById("output").classList.remove("hidden");
+});
+
+document.getElementById("copy").addEventListener("click", async () => {
+  const text = document.getElementById("result").textContent;
+  try {
+    await navigator.clipboard.writeText(text);
+    document.getElementById("copy").textContent = "Copied ✓";
+  } catch {
+    const area = document.createElement("textarea");
+    area.value = text;
+    document.body.appendChild(area);
+    area.select();
+    document.execCommand("copy");
+    area.remove();
+    document.getElementById("copy").textContent = "Copied ✓";
+  }
+  setTimeout(() => document.getElementById("copy").textContent = "Copy text", 1800);
+});
+</script>
+</body>
+  </html>
+  
