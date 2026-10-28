@@ -57,10 +57,11 @@ document.getElementById("generate").addEventListener("click", async () => {
 
         const data = await response.json();
         
-        if (data.success) {
+                if (data.success) {
             document.getElementById("result").textContent = data.result;
         } else {
-            document.getElementById("result").textContent = "Error aagya bhai! Server se jawab nahi aaya.";
+            // अब यह सर्वर से आने वाला असली एरर दिखाएगा
+            document.getElementById("result").textContent = "Backend Error: " + (data.error || "Unknown error");
         }
     } catch (error) {
         document.getElementById("result").textContent = "Connection Error! Render server check karein.";
