@@ -43,7 +43,7 @@ document.getElementById("generate").addEventListener("click", async () => {
     document.getElementById("output").classList.remove("hidden");
 
     // ⚠️ यहाँ अपना Render वाला असली URL डालें
-    const BACKEND_URL = 'https://ai-video-backend-zmlc.onrender.com/api/generate-story'; 
+    const BACKEND_URL = 'https://ai-video-backend-2mlc.onrender.com/api/generate-story'; 
 
     try {
         // हम बैकएंड को बता रहे हैं कि क्या बनाना है
